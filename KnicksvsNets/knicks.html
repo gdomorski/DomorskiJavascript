@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+
+<!--As a practice for coding bootcamps I decided to create my own project comparing the 2014-2015 New York Knicks to the 2014-2015 Brooklyn Nets. My background is from Eloquent Javascript, CodeSchool and Coderbyte excercises. Thank you for checking out my project!-->
+<head>
+<title>Brooklyn Nets vs. NY Knicks by Greg Domorski</title>
+<meta charset="utf-8">
+<meta name="author" content="Greg Domorski">
+
+<style type="text/css">
+div#form {
+  width: 300px;
+  float: left;
+  }
+  
+div#analysis {
+  width: 300px;
+  float: right;
+  }
+  
+div#middleimage {
+  margin-left: 360px;
+  margin-right: 310px;
+  width: 532px;
+  height: 290px;
+  background-image: url(knicksnetsimage.jpg);
+
+  }
+  
+
+div#analysis td {
+  background-color: #0953A0;
+  color:#FF7518;
+  margin: 10px;
+  padding: 10px;
+  text-align: right;
+  width: 100px;
+  }
+  
+div#analysis tr:last-child td {
+
+  font-weight: bold;
+  } 
+  
+  
+</style>
+
+
+<script type="text/javascript" src="knicksjs.js">
+
+</script>
+</head>
+<body BACKGROUND="shutterstock_92062157.jpg">
+
+<div id="form">
+
+  <fieldset>
+  <legend><FONT COLOR="FFFFFF">Knicks</FONT></legend>
+  <select name="knicks" id="knicks" onchange="updateTotal()">
+  <option value="knicksPlayer0">Select a Knick</option>
+  <option value="knicksPlayer1">Quincy Acy </option>
+  <option value="knicksPlayer2">Cole Aldrich  </option>
+  <option value="knicksPlayer3">Lou Amundson </option>
+  <option value="knicksPlayer4">Carmelo Anthony </option>
+  <option value="knicksPlayer5">Andrea Bargnani  </option>
+  <option value="knicksPlayer6"> Jose Calderon </option>
+  <option value="knicksPlayer7">Cleanthony Early</option>
+  <option value="knicksPlayer8">Langston Galloway  </option>
+  <option value="knicksPlayer9">Tim Hardaway Jr.  </option>
+  <option value="knicksPlayer10">Shane Larkin  </option>
+  <option value="knicksPlayer11">Ricky Ledo </option>
+  <option value="knicksPlayer12">Alexey Shved  </option>
+  <option value="knicksPlayer13">Jason Smith </option>
+  <option value="knicksPlayer14">Lance Thomas </option>
+  <option value="knicksPlayer15">Travis Wear</option>
+  </select>
+  </fieldset>
+  <fieldset>
+  <legend><FONT COLOR="FFFFFF">Nets</FONT></legend>
+  <select name="netsTeam" id="netsTeam" onchange="updateTotal()">
+  <option value="netsPlayer0"> Select a Net </option>
+  <option value="netsPlayer1">Alan Anderson</option>
+  <option value="netsPlayer2">Bojan Bogdanovic</option>
+  <option value="netsPlayer3"> Markel Brown </option>
+  <option value="netsPlayer4"> Earl Clark </option>
+  <option value="netsPlayer5"> Jarrett Jack  </option>
+  <option value="netsPlayer6"> Cory Jefferson </option>
+  <option value="netsPlayer7"> Joe Johnson</option>
+  <option value="netsPlayer8"> Jerome Jordan  </option>
+  <option value="netsPlayer9" > Sergey Karasev  </option>
+  <option value="netsPlayer10"> Brook Lopez  </option>
+  <option value="netsPlayer11"> Darius Morris </option>
+  <option value="netsPlayer12" > Mason Plumlee  </option>
+  <option value="netsPlayer13" > Mirza Teletovic </option>
+  <option value="netsPlayer14"> Deron Williams </option>
+  <option value="netsPlayer15" > Thaddeus Young </option>
+  </select>
+  </fieldset>
+
+  <fieldset>
+  <legend><FONT COLOR="FFFFFF">What do you want to compare?</FONT></legend>
+  <select name="compare" id="compare" onchange="updateTotal()">
+  <option value="compare"> What do you want to compare? </option>
+  <option value="points"> Points Per Game </option>
+  <option value="assists"> Assists Per Game  </option>
+  <option value="rebounds"> Rebounds Per Game </option>
+  <option value="blocks"> Blocks Per Game </option>
+  <option value="games"> Games Played </option>
+  </select>
+  </fieldset>
+
+</div>
+
+<div id="analysis">
+  <table>
+  <tr><td>NY Knick</td><td id="playerValue">0</td></tr>
+  <tr><td>Brooklyn Net</td><td id="netsValue"></td></tr>
+  <tr><td>Analysis</td><td id="Result"></td></tr>
+  </table>
+</div>
+
+<div id="middleimage">
+ 
+</div>
+
+
+
+
+
+
+</body>
+</html>
