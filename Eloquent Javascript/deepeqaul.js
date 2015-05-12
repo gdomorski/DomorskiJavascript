@@ -1,5 +1,4 @@
-function deepEqual(a, b) {
-  if (a === b) return true;
+function deepEqual(obj1, obj2){
+ return JSON.stringify(obj1) === JSON.stringify(obj2); 
   
-  if (a == null || typeof a != "object" || b == null || typeof b != "object")  //
-    return false;
+}
