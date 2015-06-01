@@ -1,4 +1,4 @@
-STILL A WORK IN PROGRESS
+Still a work in the progress...
 
 <!DOCTYPE html>
 <html>
@@ -12,13 +12,9 @@ STILL A WORK IN PROGRESS
 
     <h2>Borken Chat</h2>
 
-    <input class="draft" type="text"/> <button class="send">Send</button>
-
-    <ul class="messages">
-      
-
-
-    </ul>
+    <input class="draft" type="text"/> 
+    <button class="send">Send</button>
+    <ul class="messages">  </ul>
 
    <script>  //moved the script to the bottom of the page so it has time to load all the HTML
       /*
@@ -48,21 +44,24 @@ STILL A WORK IN PROGRESS
        delete Chat.fetch;
        delete Chat.send;
 
-      Chat.display = function (str){
-        
+      Chat.display = function (msg){
+
+      
         //add that li to the messages list
-        $('.messages').append('<li>' + str + '</li>') //use dot to reference classes, # references an ID nothing references the tag name, append adds something to the front while prepend adds something the the end
+        $('.messages').append('<li>' + msg.text + '</li>') //use dot to reference classes, # references an ID nothing, references the tag name, append adds something to the front while prepend adds something the the end. li refers to a list element. We are getting the text from an object.
 
       };
 
+
       Chat.fetch = function (fn){  //this function goes to the server returns a array of messages, when it came back from the server, run a callback function
-
-
-      $.get( "https://api.parse.com/1/classes/chats?order=createdAt", function( data ) {  //find the location from the network panel
-        console.log(data);
+      $.get("https://api.parse.com/1/classes/chats?order=createdAt", function( data ) {  //find the location from the network panel, job of this url is to send messages
+        fn(data.results);
          // alert( "Load was performed." );
           });
+      }
 
+      Chat.send = function (str){
+        $.post('https://api.parse.com/1/classes/chats', {text: str, username: 'Dan'} );
       }
 
 
@@ -76,11 +75,11 @@ STILL A WORK IN PROGRESS
 
 
     window.setTimeout(getMessages, 3000);  //get messages every three seconds.
-
     // Hook up the button and the input with jQuery
     $('.send').click(function() {  //send references the button class
-      Chat.send($('.draft').val()); //gets the text inside the draft element  
+      Chat.send($('.draft').val()); //gets the text inside the draft element, .val gets the value;
     });
+
 
 
 
