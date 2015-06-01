@@ -1,4 +1,4 @@
-//Closures
+//Closure  practice from CodeSchool
 
 
 function mystery(3) {
