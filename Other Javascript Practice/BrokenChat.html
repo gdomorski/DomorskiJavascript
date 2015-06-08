@@ -1,4 +1,4 @@
-Still a work in the progress...
+
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +10,14 @@ Still a work in the progress...
   <body>
 
 
-    <h2>Borken Chat</h2>
+    <h2>Fixed Chat</h2>
 
+    <h3 class="new-msgs"></h3>
     <input class="draft" type="text"/> 
     <button class="send">Send</button>
     <ul class="messages">  </ul>
+
+
 
    <script>  //moved the script to the bottom of the page so it has time to load all the HTML
       /*
@@ -40,38 +43,75 @@ Still a work in the progress...
        *  NOTE: Please do not publish or share any of the code associated with this challenge. We've worked really
        *  hard to build this material and publishing solutions diminishes its effectiveness.
        */
+
        delete Chat.display;
        delete Chat.fetch;
        delete Chat.send;
 
+
+      var counter = 0;
+      var msgLength = 0;
+
+      $(document).ready(function(){
+        getMessages();
+      })
+
+
       Chat.display = function (msg){
-        //add that li to the messages list
-        $('.messages').append('<li>' + msg.text + '</li>') //use dot to reference classes, # references an ID nothing, references the tag name, append adds something to the front while prepend adds something the the end. li refers to a list element. We are getting the text from an object.
+        // add that li to the messages list
+        $('.messages').prepend('<li>' + msg.text + '</li>'); 
+        /* use dot to reference classes, # references an ID nothing, references the tag name, append adds something to the front while prepend adds something the the end. li refers to a list element. We are getting the text from an object. prepend adds messages to the top, append adds messages to the bottom, string represnetation of an element for prepend */
       };
 
 
+
       Chat.fetch = function (fn){  //this function goes to the server returns a array of messages, when it came back from the server, run a callback function
-      $.get("https://api.parse.com/1/classes/chats?order=createdAt", function( data ) {  //find the location from the network panel, job of this url is to send messages
-        fn(data.results);
+        var url = Chat.resourceAddress + '?order=createdAt'  //the resource address can be found when you console.log(Chat)
+        $.get(url, function( data ) {  //find the location from the network panel, job of this url is to send messages
+          $('.messages').html(''); //clearing all the messages
+
+          fn(data.results);  //adds them to the page, results can be found in the response window of the url
          // alert( "Load was performed." );
-          });
+        });
       }
 
       Chat.send = function (str){
-        $.post('https://api.parse.com/1/classes/chats', {text: str, username: 'Dan'} );
+        // $.ajax ({
+        //   method: "POST",
+        //   url: 'https://api.parse.com/1/classes/chats',
+        //   data: { text: 'str', username: 'Dan'}
+
+        // })
+        $.post(Chat.resourceAddress, JSON.stringify({text: Chat.username + ": " + str, username: Chat.username})
+         );  //second parameter is the format the server is expecting 
       }
 
 
-      Chat.guide.start();
+    var getMessages = function () { 
+      
+      Chat.fetch(function(msgs){ ////fetch gets the messages  
+          msgLength = msgs.length;
+          msgs.forEach(function(msg){   //forEach method shows each message on a different line
 
-      var getMessages = Chat.fetch(function(msgs){ ////fetch gets the messages
-        msgs.forEach(function(msg){   //forEach method shows each message on a different line
-          Chat.display(msg)  //display gets the messages on the screen
-        })
+          Chat.display(msg);  //display gets the messages on the screen
+
+        });
       });
+    };
 
 
-    window.setTimeout(getMessages, 3000);  //get messages every three seconds.
+
+
+
+    window.setInterval(function(){
+        getMessages();
+        counter += msgLength; //shothand way of writing counter = counter + msgs.length;
+        var messageElement =  $('.new-msgs');
+        var text = counter + ' New Messages'  //.text is a getter
+  
+        messageElement.text(text);  //sets the text = to variable text, which is a string
+
+          }, 3000);  //get messages every three seconds.
     // Hook up the button and the input with jQuery
     $('.send').click(function() {  //send references the button class
       Chat.send($('.draft').val()); //gets the text inside the draft element, .val gets the value;
@@ -79,6 +119,39 @@ Still a work in the progress...
 
 
 
+
+
+// all our messages
+
+//   1. rob1
+//   2. rob2
+
+//   1. ourmessage
+//   2. rob1
+//   3. rob2
+//   4. rob3
+//   5. rob4
+//   6. rob5
+
+
+// server list of messages
+//   1. rob1
+//   2. rob2
+//   3. rob3
+//   4. ourmessage
+//   5. rob1
+//   6. rob3
+
+// our page list of messages
+//   // 1. rob3
+//   // 2. rob2
+//   // 3. rob1
+//   1. ourmessage
+//   2. rob3
+//   3. rob2
+
+  //text = "Robochat: Androids dream of"
+  //username = "Robochat"
 
     </script>
 
