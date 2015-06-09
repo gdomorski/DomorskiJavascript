@@ -1,26 +1,21 @@
 
-function Bubblesort(arr){ 
 
-	
-	for(var i = 0; i < arr.length-1; i++){  //you make the length -1  because u don't want to compare the last number to undefined
-
-		for(var j = 0; j < arr.length-1; j++){
-		    console.log(arr[j], arr[j+1]);
-			if(arr[j] > arr[j + 1]);
-				var temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-		
-	}
-	
-
-	}
-	return arr;
-}
+var bubbleSort = function(arr) {
+  arr.forEach(function (value, index){
+    for(var j = index + 1; j < arr.length; j++){
+      if(value > arr[j]){
+        var temp = arr[index];
+        arr[index] = arr[j];
+        arr[j] = temp;
+      }
+    }
+  });
+  return arr;
+};
 
 
-//the inner loop moves the largest number to the end. The out loop, makes sure every number is sorted
+
+
 
 
 Bubblesort([1,2,4,12,11,9]);
