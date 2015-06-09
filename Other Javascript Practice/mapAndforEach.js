@@ -26,10 +26,11 @@ array.map(function (num){
 
 //
 
-function map(array, transform) {
+function map(array, callback) {
   var mapped = [];
-  for (var i = 0; i < array.length; i++)
-    mapped.push(transform(array[i]));
+  for (var i = 0; i < array.length; i++){
+    mapped.push(callback(array[i]));
+  }
   return mapped;
 }
 
