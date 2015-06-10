@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,13 +10,17 @@
   </head>
   <body>
 
-
-    <h2>Fixed Chat</h2>
+    <h2>Greg Domorski's Fixed ChatBuilder App</h2>
 
     <h3 class="new-msgs"></h3>
     <input class="draft" type="text"/> 
     <button class="send">Send</button>
+    <button onclick="changeUserName()">Change Username </button>
     <ul class="messages">  </ul>
+    
+
+
+
 
 
 
@@ -48,7 +53,7 @@
        delete Chat.fetch;
        delete Chat.send;
 
-
+      var newUserName;
       var counter = 0;
       var msgLength = 0;
 
@@ -60,6 +65,7 @@
       Chat.display = function (msg){
         // add that li to the messages list
         $('.messages').prepend('<li>' + msg.text + '</li>'); 
+
         /* use dot to reference classes, # references an ID nothing, references the tag name, append adds something to the front while prepend adds something the the end. li refers to a list element. We are getting the text from an object. prepend adds messages to the top, append adds messages to the bottom, string represnetation of an element for prepend */
       };
 
@@ -92,15 +98,10 @@
       Chat.fetch(function(msgs){ ////fetch gets the messages  
           msgLength = msgs.length;
           msgs.forEach(function(msg){   //forEach method shows each message on a different line
-
           Chat.display(msg);  //display gets the messages on the screen
-
         });
       });
     };
-
-
-
 
 
     window.setInterval(function(){
@@ -116,6 +117,15 @@
     $('.send').click(function() {  //send references the button class
       Chat.send($('.draft').val()); //gets the text inside the draft element, .val gets the value;
     });
+
+
+
+
+    function changeUserName(){
+      Chat.username = prompt('What do you want to change your username to?');
+      alert("Your username has been changed to " + Chat.username )
+    }
+
 
 
 
