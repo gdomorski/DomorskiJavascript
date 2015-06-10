@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,6 +16,8 @@
     <button class="send">Send</button>
     <button onclick="changeUserName()">Change Username </button>
     <ul class="messages">  </ul>
+    <button onclick="resizeText(1)"> Increase Text Size</button>
+    <button onclick="resizeText(-1)"> Decrease Text Size</button>
     
 
 
@@ -108,7 +109,7 @@
         getMessages();
         counter += msgLength; //shothand way of writing counter = counter + msgs.length;
         var messageElement =  $('.new-msgs');
-        var text = counter + ' New Messages'  //.text is a getter
+        var text = counter + ' Messages Loaded'  //.text is a getter
   
         messageElement.text(text);  //sets the text = to variable text, which is a string
 
@@ -126,7 +127,12 @@
       alert("Your username has been changed to " + Chat.username )
     }
 
-
+    function resizeText(multiplier) {
+     if (document.body.style.fontSize == "") {
+        document.body.style.fontSize = "1.0em";
+      }
+    document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+    }
 
 
 
