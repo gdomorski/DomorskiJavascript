@@ -1,140 +1,242 @@
+
+
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chatbuilder</title>
+    <script src="http://chatbuilder.hackreactor.com/ChatBuilder.js"></script>
 
 
-<head>
-<title>Fullstack Academy Bowling Project by Greg Domorski</title>
-<meta charset="utf-8">
-<meta name="author" content="Greg Domorski">
-
-<style>
-
-  body,html{  /* make it apply to everything, everything exists in everything in those tags */
-    font-family:arial;
-  }
-
-  #message{
-    font-size:30px;
-  }
-  
-  #lane{
-    height: 102px;
-    border: solid 1px black;  /* first, style, second size, third color...*/
-    background-color:white;
-    width: 690px;
-  }
-  
-  .pin{
-    width: 30px; 
-    height: 100px;
-  }
-  
-  .sheet{
-    width:692px;
-    height: 64px;  
-    font-weight:bolder;
-    background-color:white;
-  }
-  
-  .corner{
-    width:30px;
-    height:30px;
-    float:right;
-    border:solid 1px black;
-    text-align:center;
-  }
-  
-  .corner-tenth{
-    width:30px;
-    height:30px;
-    float:left;
-    border:solid 1px black;
-    text-align:center;
-  }
-  
-  .box-tenth{
-    width:96px;
-    height:64px;
-    border:solid 1px black;
-    float:left;   
-  }
-  
-  .bottom{
-    height:30px;
-    width:62px;
-    margin-top:32px;
-    text-align:center;
-  }
-  
-  .indent{
-    margin-left:8px;
-    float:left;
-  }
-  
-  .box{
-    width:64px;
-    height:64px;
-    border:solid 1px black;
-    float:left;   
-  }
-  
-  .hidden{
-    display:none;
-  }
-  
-  .btn{
-    width:25%;
-    height:100px;
-    font-size:32px;
-  }
-  
-  .center{
-    display:block;
-    margin:auto;
-    text-align:center;
-  }
-  
-  .message-box{
-    border:solid 1px black;
-    width:690px;
-    height:64px;
-    margin-top:5%;
-    background-color:white;
-  }
 
 
-</style>
+    <style>
+    body, html {  /* make it apply to everything, everything exists in everything in those tags */
+    font-family: arial;
+    background-image: url("http://envirosafety.ca/wp-content/uploads/2015/04/simple_blue_wallpaper_by_eassd1-d3atjhj.jpg");
 
-</head>
 
-<body BACKGROUND="strike.jpg">
-    <div class="hidden">
-      <div id="display-frames">Frames: </div>  
-      <div id="display-score">Score: </div>
-      <div id="display-turn">Turn # 0</div>
-      <div id="display-pins">Pins Left: 0</div>
-      <div id="currentFrameScore""></div>
-    </div>
+    }
+
+    h2{
+      background: #E1FFFF;
+      border:solid 1px black;
+      width: 600px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-align: center;
+      padding-left: 3px;
+    }
+
+    .messages{
+      border:solid 1px black;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      width: 562px;
+      background: #E1FFFF;
+
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 30px;
+
+    }
+
+    </style>
+
+  </head>
+  <body>
+
+    <h2>Greg Domorski's Fixed ChatBuilder App</h2>
+
+    <h3 class="new-msgs"></h3>
+    <input class="draft" type="text"/> 
+    <button class="send">Send</button>
+    <button onclick="changeUserName()">Change Username </button>
+    <button onclick="resizeText(1)"> Increase Text Size</button>
+    <button onclick="resizeText(-1)"> Decrease Text Size</button>
+    <ul class="messages">  </ul>
     
-    <div class="center message-box" id="message">Welcome to Greg Domorski's bowling game. <br> I hope you have fun! Press 'Start Game' to begin</div>
+
+
+
+
+
+
+   <script> 
   
-    <div class="sheet center" id="sheet"></div>
+ 
+
+
+
+
+
+       //moved the script to the bottom of the page so it has time to load all the HTML
+      /*
+       *  Nice, you found the HTML source code for ChatBuilder! This document kicks everything off when you load it
+       *  in your browser, and is a starting point for the whole app. It's pretty incomplete though--you should
+       *  make your own version of it that works better!
+       *
+       *  You can't edit the code here until it's in a file on your hard drive, so copy this whole page of source
+       *  code and paste it into a plain text editor like Sublime Text 2 (http://www.sublimetext.com/). Save it as
+       *  a `.html` file, and open that file with Google Chrome. You can now edit it however you like, and refresh
+       *  the page to see your modifications take effect on how the application runs.
+       *
+       *  Fair warning: one or more of the steps ahead could require a good amount of research to understand all
+       *  the terms and technologies mentioned. Googling words you haven't heard before is a great idea. Just be
+       *  careful not to spend too long in 'research mode' without making any forward progress on your real goal of
+       *  completing the app!
+       *
+       *  When you've got this code saved as a local file, uncomment the line of JavaScript code below and open
+       *  the new file in Google Chrome. Your next instructions will be waiting for you in the JavaScript console.
+       *  If you already know the Chrome JS development tools pretty well, feel free to skip this opening tutorial
+       *  by calling the `.start()` function on `Chat.guide` instead of `.intro()`
+       *
+       *  NOTE: Please do not publish or share any of the code associated with this challenge. We've worked really
+       *  hard to build this material and publishing solutions diminishes its effectiveness.
+       */
+       
+
+
+       delete Chat.display;
+       delete Chat.fetch;
+       delete Chat.send;
+
+      var counter = 0;
+      var msgLength = 0;
+      var newUserName;
+
+      $(document).ready(function(){
+        getMessages();
+      })
+
+
+      Chat.display = function (msg){
+        // add that li to the messages list
+        var str = msg.text;
+        if(!str.includes('RoboChat')){
+          $('.messages').prepend('<li>' + msg.text.fontcolor("green") + '</li>'); 
+        
+        } else {
+
+          $('.messages').prepend('<li>' + msg.text + '</li>'); 
+
+        /* use dot to reference classes, # references an ID nothing, references the tag name, append adds something to the front while prepend adds something the the end. li refers to a list element. We are getting the text from an object. prepend adds messages to the top, append adds messages to the bottom, string represnetation of an element for prepend */
+        }
+      };
+
+
+
+      Chat.fetch = function (fn){  //this function goes to the server returns a array of messages, when it came back from the server, run a callback function
+        var url = Chat.resourceAddress + '?order=createdAt'  //the resource address can be found when you console.log(Chat)
+        $.get(url, function( data ) {  //find the location from the network panel, job of this url is to send messages
+          $('.messages').html(''); //clearing all the messages
+
+          fn(data.results);  //adds them to the page, results can be found in the response window of the url
+         // alert( "Load was performed." );
+        });
+      }
+
+      Chat.send = function (str){
+        // $.ajax ({
+        //   method: "POST",
+        //   url: 'https://api.parse.com/1/classes/chats',
+        //   data: { text: 'str', username: 'Dan'}
+
+        // })
+        $.post(Chat.resourceAddress, JSON.stringify({text: Chat.username + ": " + str, username: Chat.username})
+         );  //second parameter is the format the server is expecting 
+      }
+
+
+    var getMessages = function () { 
+      
+      Chat.fetch(function(msgs){ ////fetch gets the messages  
+          msgLength = msgs.length;
+          msgs.forEach(function(msg){   //forEach method shows each message on a different line
+          Chat.display(msg);  //display gets the messages on the screen
+        });
+      });
+    };
+
+
+    window.setInterval(function(){
+        getMessages();
+        counter += msgLength; //shothand way of writing counter = counter + msgs.length;
+        var messageElement =  $('.new-msgs');
+        var text = counter + ' New Messages'  //.text is a getter
   
-    <div class="center" id="lane"></div>
+        messageElement.text(text);  //sets the text = to variable text, which is a string
+
+          }, 3000);  //get messages every three seconds.
+    // Hook up the button and the input with jQuery
+    $('.send').click(function() {  //send references the button class
+      Chat.send($('.draft').val()); //gets the text inside the draft element, .val gets the value;
+    });
+
+
+
+
+    function changeUserName(){
+      newUserName = prompt('What do you want to change your username to?');
+      
+      if(newUserName){
+        Chat.username = newUserName
+        alert("Your username has been changed to " + Chat.username )
+      }else{
+        alert("Your username will stay at " + Chat.username )
+      }
+
+    }
+
+    function resizeText(multiplier) {
+     if (document.body.style.fontSize == "") {
+        document.body.style.fontSize = "1.0em";
+      }
+    document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
+    }
+
+
+
+
     
-    <div class="center">
-     
-      <input class="btn center" id= "startTheGame" type="button" onclick="bowlingGame()" value="Start Game"></input>
-      <input class="btn center" id="bowlButton" type="button" onclick="turn()" value="Bowl" style="display:none;"> </input>
-      <input class="btn center" id="frameButton" type="button" onclick="turn()" value="Next Frame" style="display:none;"> </input>
-      <input class="btn center" type="button" onclick="history.go(0)" value="Reset Game"></input>  
-    </div>
-</body>
 
-<script type="text/javascript" src="scoreboard.js"></script>
-<script type="text/javascript" src="frame.js"></script>
-<script type="text/javascript" src="view.js"></script>
-<script type="text/javascript" src="game.js"></script>
-<script type="text/javascript" src="main.js"></script> <!-- We want the main to load last, so it will not call things that are not loaded -->
 
+
+// all our messages
+
+//   1. rob1
+//   2. rob2
+
+//   1. ourmessage
+//   2. rob1
+//   3. rob2
+//   4. rob3
+//   5. rob4
+//   6. rob5
+
+
+// server list of messages
+//   1. rob1
+//   2. rob2
+//   3. rob3
+//   4. ourmessage
+//   5. rob1
+//   6. rob3
+
+// our page list of messages
+//   // 1. rob3
+//   // 2. rob2
+//   // 3. rob1
+//   1. ourmessage
+//   2. rob3
+//   3. rob2
+
+  //text = "Robochat: Androids dream of"
+  //username = "Robochat"
+
+    </script>
+
+  </body>
 </html>
