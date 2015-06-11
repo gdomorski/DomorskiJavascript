@@ -6,6 +6,31 @@
     <meta charset="utf-8">
     <title>Chatbuilder</title>
     <script src="http://chatbuilder.hackreactor.com/ChatBuilder.js"></script>
+
+
+
+
+    <style>
+    body, html {  /* make it apply to everything, everything exists in everything in those tags */
+    font-family: arial;
+    }
+
+    .messages{
+    border:solid 1px black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 500px;
+    background: #F8F8F8;
+    }
+
+    h2 {
+      text-align: left;
+      font-size: 30px;
+
+    }
+
+    </style>
+
   </head>
   <body>
 
@@ -15,9 +40,9 @@
     <input class="draft" type="text"/> 
     <button class="send">Send</button>
     <button onclick="changeUserName()">Change Username </button>
-    <ul class="messages">  </ul>
     <button onclick="resizeText(1)"> Increase Text Size</button>
     <button onclick="resizeText(-1)"> Decrease Text Size</button>
+    <ul class="messages">  </ul>
     
 
 
@@ -25,7 +50,15 @@
 
 
 
-   <script>  //moved the script to the bottom of the page so it has time to load all the HTML
+   <script> 
+  
+ 
+
+
+
+
+
+       //moved the script to the bottom of the page so it has time to load all the HTML
       /*
        *  Nice, you found the HTML source code for ChatBuilder! This document kicks everything off when you load it
        *  in your browser, and is a starting point for the whole app. It's pretty incomplete though--you should
@@ -49,6 +82,8 @@
        *  NOTE: Please do not publish or share any of the code associated with this challenge. We've worked really
        *  hard to build this material and publishing solutions diminishes its effectiveness.
        */
+       
+
 
        delete Chat.display;
        delete Chat.fetch;
@@ -109,7 +144,7 @@
         getMessages();
         counter += msgLength; //shothand way of writing counter = counter + msgs.length;
         var messageElement =  $('.new-msgs');
-        var text = counter + ' Messages Loaded'  //.text is a getter
+        var text = counter + ' New Messages'  //.text is a getter
   
         messageElement.text(text);  //sets the text = to variable text, which is a string
 
@@ -134,6 +169,10 @@
     document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
     }
 
+
+
+
+    
 
 
 
