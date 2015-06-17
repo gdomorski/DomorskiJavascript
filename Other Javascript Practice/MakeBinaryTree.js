@@ -54,7 +54,8 @@ MakeBinaryTree.prototype.contains = function(val) {
   	//if they are equal
   	//return true
   	if(val == node.value){
-  		return comparison = true;
+  		comparison = true;
+  	  return;
   	}
 
 
@@ -76,7 +77,7 @@ MakeBinaryTree.prototype.contains = function(val) {
   subRoutine(this);
 
 
-  		//return the boolean value;
-  		return comparison;
+//return the boolean value;
+return comparison;
 };
 
