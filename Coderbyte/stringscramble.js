@@ -1,7 +1,16 @@
+Using the JavaScript language, have the function StringScramble(str1,str2) take both parameters being passed and return the string true if a portion of str1 characters can be rearranged to match str2, otherwise return the string false. For example: if str1 is "rkqodlw" and str2 is "world" the output should return true. Punctuation and symbols will not be entered with the parameters. 
 
-//String Scrambler
+Use the Parameter Testing feature in the box below to test your code with different arguments.
 
 
-var str = "I am really looking forward to going to coding school";
+function StringScramble(str1,str2) { 
 
-var shuffled = str.split("").sort(function(){return 0.5-Math.random()}).join('');
+  for (var i=0; i< str2.length; i++) {
+       if (str1.indexOf(str2[i]) === -1) {
+       return false;
+       } 
+  }
+  
+  return true;
+         
+}
