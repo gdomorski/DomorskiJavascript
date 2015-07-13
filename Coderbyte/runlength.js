@@ -1,24 +1,3 @@
-function RunLength(str) { 
-
-  var counter = 0;
-  var answer = "";
-  
-  
-  for(var i = 0; i < str.length; i++){
-   counter++
-    if(str[i] !== str[i+1]){
-     answer += counter;
-     answer += str[i];
-     counter = 0;
-    }
-  }
-  
-
-  return answer 
-         
-}
-
-
 //If you wanted to count all the same letters in the entire string
 
 
