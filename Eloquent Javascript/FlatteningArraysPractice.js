@@ -38,7 +38,7 @@ function PutArraysTogether(arrays){
 }
 
 
-//Another way...
+//Another way...Only works with numbers. Or you could convert everything to strings...
 
 
 var flatten = function(arr) {
