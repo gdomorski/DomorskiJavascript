@@ -41,11 +41,12 @@ function PutArraysTogether(arrays){
 //Another way...
 
 
-function PutArraysTogether(arrays){
-  var newArrays = arrays.join(",").split(",")
-  return newArrays;
+var flatten = function(arr) {
+	var newArr = arr.toString().split(',');
+	for (var i = 0; i < newArr.length; i++) {
+		newArr[i] = Number(newArr[i]);
+	}
+	return newArr;
 }
-
-PutArraysTogether([[0, 1], [2, 3], [4, 5]]);
 
 
