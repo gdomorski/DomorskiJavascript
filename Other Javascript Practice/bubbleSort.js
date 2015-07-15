@@ -19,9 +19,9 @@ function bubblesort(array){
 				changed = true;
 				//set the variable to a temp value;
 				var temp = array[k];
-				//set the value to the one in front of it
+				//set the smaller value to the left
 				array[k] = array[k+1];
-				//set the value in front to the larger value;
+				//set the larger value in front
 				array[k + 1] = temp;
 			}
 		}
