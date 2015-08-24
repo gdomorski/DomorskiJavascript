@@ -50,3 +50,15 @@ var flatten = function(arr) {
 }
 
 
+//Flatten using reduce
+
+var flatten = function  (arr) {
+   return reduce(arr, function  (a,b) {
+       if (Array.isArray(b)) {
+           return a.concat(flatten(b));
+       }else{
+           return a.concat(b);
+       }
+   },[]);
+};
+
